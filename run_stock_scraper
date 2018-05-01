@@ -1,0 +1,5 @@
+#!/bin/bash
+# scrapy project files require us to be in the project folder to load settings
+# run with scrapy virtualenv
+cd /home/tingi/tingi-dev/stock-spider/
+"/home/tingi/.virtualenvs/scrapy36/bin/python" app.py
