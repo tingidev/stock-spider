@@ -7,14 +7,16 @@ class Listing(Document):
 
     date = DateTimeField(required=True)
     date_str = StringField(max_length=10, required=True)
-    acronym = StringField(max_length=6, required=True)
+    acronym = StringField(max_length=8, required=True)
     name = StringField(max_length=30, required=True)
+    loc = StringField(max_length=3, required=True)
     pe_val = FloatField(required=True)
     volume = FloatField(required=True)
     price = FloatField(required=True)
+    change = FloatField(required=True)
 
     meta = {
         'collection': 'listings', # daily summary
-        'ordering': ['-price'], # default ordering
+        'ordering': ['-change'], # default ordering
         'auto_create_index': False, # MongoEngine will not create index
         }

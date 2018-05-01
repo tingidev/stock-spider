@@ -7,6 +7,23 @@ from datetime import datetime as dt
 import scrapy
 from stock_listing.items import StockItem
 
+def switch_demo(argument):
+    switcher = {
+        1: "January",
+        2: "February",
+        3: "March",
+        4: "April",
+        5: "May",
+        6: "June",
+        7: "July",
+        8: "August",
+        9: "September",
+        10: "October",
+        11: "November",
+        12: "December"
+    }
+    print switcher.get(argument, "Invalid month")
+
 def convert_volume(old_volume):
         # Convert sales volume from string like "6.32M" to int of 6320
         # Can convert thousands (K), millions (M) and billions (B)
@@ -33,12 +50,18 @@ def convert_volume(old_volume):
     return new_val/1e3
 
 class StockSpider(scrapy.Spider):
+    # Scrape SP500 stock listings based in New York, US
     name = 'stock'
     allowed_domains = ['money.cnn.com']
     handle_httpstatus_all = True
 
     start_urls = [
-        'http://www.money.cnn.com/data/markets/sandp/?page=1'
+        'http://www.money.cnn.com/data/markets/sandp/?page=1',
+        'http://money.cnn.com/data/world_markets/ftse100/?page=1',
+        'http://money.cnn.com/data/world_markets/cac40/?page=1',
+        'http://money.cnn.com/data/world_markets/dax/?page=1',
+        'http://money.cnn.com/data/world_markets/hang_seng/?page=1',
+        'http://money.cnn.com/data/world_markets/nikkei225/?page=1'
     ]
 
     def parse(self, response):
@@ -50,6 +73,20 @@ class StockSpider(scrapy.Spider):
             item['date_str'] = item['date'].strftime('%Y-%m-%d')
             item['acronym'] = company.css('td a::text').extract_first()
             item['name'] = company.css('td::text').extract()[0][1:]
+            if 'sandp' in response.url:
+                item['loc'] = 'NYC'
+            elif 'ftse100' in response.url:
+                item['loc'] = 'LON'
+            elif 'cac40' in response.url:
+                item['loc'] = 'PAR'
+            elif 'dax' in response.url:
+                item['loc'] = 'FRA'
+            elif 'hang_seng' in response.url:
+                item['loc'] = 'HNK'
+            elif 'nikkei225' in response.url:
+                item['loc'] = 'TKY'
+            else:
+                item['loc'] = ''
             current_pe = company.css('td::text').extract()[1]
             try:
                 item['pe_val'] = float(current_pe.replace(",",""))
@@ -62,12 +99,19 @@ class StockSpider(scrapy.Spider):
                 item['price'] = float(current_price.replace(",",""))
             except:
                 item['price'] = 0.0
-
+            current_change = company.css('td span::text').extract()[2][:-1]
+            try:
+                item['change'] = float(current_change)
+            except:
+                item['change'] = 0.0
+            
             yield item
 
-        current_page_nr = ''.join(x for x in response.url if x.isdigit())
-        if int(current_page_nr) < 34:
+        len_minus = len(response.url)-7
+        current_page_nr = ''.join(x for x in response.url[len_minus:] if x.isdigit())
+        max_page_nr = ''.join(x for x in response.css('div.paging::text').extract()[1] if x.isdigit())
+        if int(current_page_nr) < int(max_page_nr):
             next_page_nr = int(current_page_nr)+1
-            next_page = response.url
-            next_page = next_page.replace(current_page_nr,str(next_page_nr))
+            next_page = response.url[len_minus:]
+            next_page = response.url[:len_minus] + next_page.replace(current_page_nr, str(next_page_nr))
             yield scrapy.Request(next_page, callback=self.parse)

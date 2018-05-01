@@ -2,23 +2,26 @@
 <html lang="en">
 
 <head>
-    <title> Stock Listings Top </title>
+    <title>Stock Listings Top </title>
 </head>
 
 <body>
-	<!--
+    <!--
 	<script>
 		function calc_difference(){
 
 		}
 	</script>
 	-->
-	<h3>Top listings of the day</h3>
-    <ol id="listings">
-    {% for index in Listing.objects(date_str__gte=day_to_pull)[0:15] %}
-        <li>(Company: {{ index.name }} | Price: ${{ index.price }})</li>
+    {% for selected_loc in Listing.objects(date_str__gte=day_to_pull).distinct('loc') %}
+        <h3>Top performers in {{ selected_loc }}</h3>
+        <ol id="listings">
+        {% for index in Listing.objects(date_str__gte=day_to_pull, loc=selected_loc)[0:5] %}
+            <li>Name: {{ index.name }} &nbsp;|&nbsp; Change: {{ index.change }}% &nbsp;|&nbsp; Value: {{index.price}}</li>
+        {% endfor %} 
+        </ol>
     {% endfor %}
-    </ol>
+    
 </body>
 
 </html>

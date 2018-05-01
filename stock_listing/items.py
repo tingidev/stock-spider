@@ -18,3 +18,5 @@ class StockItem(scrapy.Item):
     pe_val = scrapy.Field()
     volume = scrapy.Field()
     price = scrapy.Field()
+    loc = scrapy.Field()
+    change = scrapy.Field()
