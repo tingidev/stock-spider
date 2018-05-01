@@ -9,7 +9,7 @@ from datetime import date
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 from stock_listing.spiders import StockSpider
-from daily_listing_emailer import email_last_scraped_listing
+from emailer.daily_listing_emailer import email_last_scraped_listing
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
@@ -20,7 +20,7 @@ if __name__ == '__main__':
     crawler = CrawlerProcess(get_project_settings())
 
     crawler.crawl(StockSpider)
-    process.start() # the script will block here until the crawling is finished
+    crawler.start() # the script will block here until the crawling is finished
 
     email_last_scraped_listing()
     logger.info('Scrape complete and email sent.')
