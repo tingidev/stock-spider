@@ -1,5 +1,8 @@
 import os
-import configparser
+try:
+    import configparser
+except:
+    from six.moves import configparser
 from mongoengine.connection import connect
 from .data_model import Listing
 from .render_template import render
