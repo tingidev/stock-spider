@@ -1,3 +1,5 @@
+# stock_spider/pipelines.py
+
 # -*- coding: utf-8 -*-
 
 # Define your item pipelines here

@@ -1,3 +1,5 @@
+# emailer/daily_listing_emailer/data_model.py
+
 from mongoengine.document import Document
 from mongoengine.fields import DateTimeField, StringField, FloatField
 # IntField, URLField

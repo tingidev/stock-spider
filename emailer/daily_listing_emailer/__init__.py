@@ -1,3 +1,5 @@
+# emailer/daily_listing_emailer/__init__.py
+
 import os
 import configparser
 from mongoengine.connection import connect

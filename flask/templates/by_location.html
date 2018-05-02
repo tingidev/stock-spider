@@ -1,0 +1,20 @@
+<!--flask/templates/by_location.html-->
+
+{% extends "base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+    <h3>Selected Location: {{ loc }}</h3>
+
+    {% for date in Listing.objects(loc=loc).fields(date_str=1).distinct('date_str') %}
+        <h3>{{ date }}</h3>
+
+        <ul id="listings">
+            {% for index in Listing.objects(date_str=date, loc=loc).order_by('-date_str') %}
+                <li>Name: {{ index.name }} &nbsp;|&nbsp; Change: {{ index.change }}% &nbsp;|&nbsp; Value: {{index.price}}</li>
+            {% endfor %}
+        </ul>
+
+    {% endfor %}
+{% endblock %}

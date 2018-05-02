@@ -1,3 +1,5 @@
+# stock_spider/settings.py
+
 # -*- coding: utf-8 -*-
 
 # Scrapy settings for stock_listing project

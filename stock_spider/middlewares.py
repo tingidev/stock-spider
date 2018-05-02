@@ -1,3 +1,5 @@
+# stock_spider/middlewares.py
+
 # -*- coding: utf-8 -*-
 
 # Define here the models for your spider middleware

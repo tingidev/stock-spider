@@ -1,8 +1,4 @@
-## v2.0
-## Date 30-04-2018
-## Tingi Dev
-
-## Script to crawl stock listings and store in MongoDB
+# app.py
 
 import logging
 from datetime import date
@@ -10,9 +6,6 @@ from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 from stock_listing.spiders import StockSpider
 from emailer.daily_listing_emailer import email_last_scraped_listing
-#from twisted.internet import reactor, defer
-#from scrapy.crawler import CrawlerRunner
-#from scrapy.utils.log import configure_logging
 
 if __name__ == '__main__':
     

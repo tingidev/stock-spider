@@ -1,0 +1,14 @@
+<!--flask/templates/all-locs.html-->
+
+{% extends "base.html" %}
+
+{% block title %}By Location{% endblock %}
+
+{% block content %}
+    <h3>Available Locations</h3>
+
+        {% for loc in locs %}
+            <p><a href="{{ url_for('by_location', loc_to_pull=loc) }}">{{ loc }}</a></p>
+        {% endfor %}
+
+{% endblock %}
