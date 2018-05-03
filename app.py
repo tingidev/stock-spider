@@ -14,7 +14,7 @@ if __name__ == '__main__':
 
     # only run on weekdays
     day_today = date.strftime(date.today(), '%A').lower()
-    if day_today != 'saturday' and date_today != 'sunday':
+    if day_today != 'saturday' and day_today != 'sunday':
         crawler = CrawlerProcess(get_project_settings())
 
         crawler.crawl(StockSpider)
