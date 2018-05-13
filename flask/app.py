@@ -8,16 +8,12 @@ from models import db, Listing
 app = Flask(__name__)
 
 ## include db name in URI; _HOST entry overwrites all others
+app.config.from_pyfile('settings.cfg')
 #app.config['MONGODB_SETTINGS'] = {
 #    'db': 'tingi-sandbox',
 #    'host': 'localhost',
 #    'port': 27017
 #}
-app.config['MONGODB_SETTINGS'] = {
-    'db': 'tingi-sandbox',
-    'host': 'localhost',
-    'port': 27017
-}
 app.debug = True
 
 # initalize app with database
