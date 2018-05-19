@@ -1,17 +1,17 @@
-<!--flask/templates/base.html-->
+<!--flask/templates/index-by-loc.html-->
 
 {% extends "base.html" %}
 
 {% block title %}Index{% endblock %}
 
 {% block content %}
-    <h3>Last Run: {{ day_to_pull }}</h3>
+    <h3>Overview for: {{ loc_to_pull }}</h3>
 
     <ul id="listings">
-        {% for selected_loc in Listing.objects(date_str__gte=day_to_pull).distinct('loc') %}
-            <h3>{{ selected_loc }}</h3>
+        {% for selected_date in dates %}
+            <h3>{{ selected_date }}</h3>
 
-            {% for index in Listing.objects(date_str__gte=day_to_pull, loc=selected_loc)[0:10] %}
+            {% for index in Listing.objects(date_str=selected_date, loc=loc_to_pull)[0:10] %}
                 <li>Name: {{ index.name }} &nbsp;|&nbsp; Change: {{ index.change }}% &nbsp;|&nbsp; Value: {{index.price}}</li>
             {% endfor %}
 

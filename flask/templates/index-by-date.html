@@ -5,7 +5,7 @@
 {% block title %}Index{% endblock %}
 
 {% block content %}
-    <h3>Last Run: {{ day_to_pull }}</h3>
+    <h3>Overview for run: {{ day_to_pull }}</h3>
 
     <ul id="listings">
         {% for selected_loc in Listing.objects(date_str__gte=day_to_pull).distinct('loc') %}

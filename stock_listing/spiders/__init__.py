@@ -9,23 +9,6 @@ from datetime import datetime as dt
 import scrapy
 from stock_listing.items import StockItem
 
-def switch_demo(argument):
-    switcher = {
-        1: "January",
-        2: "February",
-        3: "March",
-        4: "April",
-        5: "May",
-        6: "June",
-        7: "July",
-        8: "August",
-        9: "September",
-        10: "October",
-        11: "November",
-        12: "December"
-    }
-    print switcher.get(argument, "Invalid month")
-
 def convert_volume(old_volume):
         # Convert sales volume from string like "6.32M" to int of 6320
         # Can convert thousands (K), millions (M) and billions (B)
@@ -58,7 +41,7 @@ class StockSpider(scrapy.Spider):
     handle_httpstatus_all = True
 
     start_urls = [
-        'http://www.money.cnn.com/data/markets/sandp/?page=1',
+        'http://money.cnn.com/data/markets/sandp/?page=1',
         'http://money.cnn.com/data/world_markets/ftse100/?page=1',
         'http://money.cnn.com/data/world_markets/cac40/?page=1',
         'http://money.cnn.com/data/world_markets/dax/?page=1',
