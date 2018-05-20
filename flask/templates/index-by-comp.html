@@ -1,0 +1,20 @@
+<!--flask/templates/index-by-loc.html-->
+
+{% extends "base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+    <h3>Overview for: {{ comp_to_pull }}</h3>
+    <h3>Location: {{ Listing.objects(name=comp_to_pull)[0].loc }}</h3>
+
+    <ul id="listings">
+        {% for selected_date in dates %}
+
+			{% for index in Listing.objects(date_str=selected_date, name=comp_to_pull) %}
+            <p>Date: {{ selected_date }} &nbsp;|&nbsp; Change: {{ index.change }}% &nbsp;|&nbsp; Value: {{index.price}}<p>
+            {% endfor %}
+
+        {% endfor %}
+    </ul>
+{% endblock %}

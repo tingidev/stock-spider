@@ -1,0 +1,16 @@
+<!--flask/templates/all-dates.html-->
+
+{% extends "base.html" %}
+
+{% block title %}By Company{% endblock %}
+
+{% block content %}
+    <h3>Available Companies</h3>
+
+    	<ul>
+        {% for comp in comps %}
+            <li><a href="{{ url_for('by_comp', comp_to_pull=comp) }}">{{ comp }}</a></li>
+        {% endfor %}
+    	</ul>
+
+{% endblock %}

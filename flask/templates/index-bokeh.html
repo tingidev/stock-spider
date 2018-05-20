@@ -1,0 +1,33 @@
+
+
+{% extends "base.html" %}
+
+{% block title %}Index{% endblock %}
+
+{% block content %}
+
+	<!-- Bokeh css/scipts -->
+	<link href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.16.min.css" rel="stylesheet" type="text/css">
+	<link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.16.min.css" rel="stylesheet" type="text/css">
+	<script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.16.min.js"></script>
+	<script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.16.min.js"></script>
+
+	<h1>Iris Plotting</h1>
+
+	<form action="/bokeh">
+	<select name="feature_name">
+		{% for feature in feature_names %}
+			{% if feature == current_feature_name %}
+				<option selected value="{{ feature }}">{{ feature }}</option> 
+			{% else %} 
+				<option value="{{ feature }}">{{ feature }}</option> 
+			{% endif %}
+		{% endfor %}
+	</select>
+	<input type="submit">
+	</form>
+
+	{{ script|safe }}
+	{{ div|safe }}
+
+{% endblock %}
