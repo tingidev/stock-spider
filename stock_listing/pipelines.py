@@ -12,7 +12,7 @@ import pymongo
 
 class MongoPipeline(object):
 
-    collection_name = 'listings'
+    collection_name = 'stock_listings'
 
     def __init__(self, mongo_uri, mongo_db):
         self.mongo_uri = mongo_uri
