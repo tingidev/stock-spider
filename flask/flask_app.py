@@ -3,10 +3,10 @@
 # bokeh imports
 import random
 import pandas as pd
-from bokeh.embed import components
-from bokeh.plotting import figure
-from bokeh.resources import INLINE
-from bokeh.util.string import encode_utf8
+#from bokeh.embed import components
+#from bokeh.plotting import figure
+#from bokeh.resources import INLINE
+#from bokeh.util.string import encode_utf8
 
 # flask imports
 from flask import Flask, render_template, request
@@ -19,23 +19,23 @@ from socket import gethostname
 app = Flask(__name__)
 
 ## Load the Iris Data Set
-iris_df = pd.read_csv("data/iris.csv", names=["Sepal Length", "Sepal Width", "Petal Length", "Petal Width", "Species"])
-feature_names = iris_df.columns[0:-1].values.tolist()
+#iris_df = pd.read_csv("data/iris.csv", names=["Sepal Length", "Sepal Width", "Petal Length", "Petal Width", "Species"])
+#feature_names = iris_df.columns[0:-1].values.tolist()
 
 ## Create the main plot
-def create_figure(current_feature_name):
-    fig = figure(plot_width=600, plot_height=400)
-    fig.line(
-        x=range(len(iris_df[current_feature_name])),
-        y=iris_df[current_feature_name]
-        )
+#def create_figure(current_feature_name):
+#    fig = figure(plot_width=600, plot_height=400)
+#    fig.line(
+#        x=range(len(iris_df[current_feature_name])),
+#        y=iris_df[current_feature_name]
+#        )
 
     # Set the x axis label
-    fig.xaxis.axis_label = current_feature_name
+#    fig.xaxis.axis_label = current_feature_name
 
     # Set the y axis label
-    fig.yaxis.axis_label = 'Count'
-    return fig
+#    fig.yaxis.axis_label = 'Count'
+#    return fig
 
 ## include db name in URI; _HOST entry overwrites all others
 app.config.from_pyfile('settings.cfg')
@@ -130,20 +130,27 @@ def index_source():
         'index-source.html',
         )
 
-@app.route('/bokeh')
-def index_bokeh():
+@app.route("/plots")
+def index_plots():
+    return render_template(
+        'index-plots.html',
+        )
+
+
+#@app.route('/bokeh')
+#def index_bokeh():
     # Determine the selected feature
-    current_feature_name = request.args.get("feature_name")
-    if current_feature_name == None:
-        current_feature_name = "Sepal Length"
+#    current_feature_name = request.args.get("feature_name")
+#    if current_feature_name == None:
+#        current_feature_name = "Sepal Length"
 
     # Create the plot
-    plot = create_figure(current_feature_name)
+#    plot = create_figure(current_feature_name)
 
     # Embed plot into HTML via Flask Render
-    script, div = components(plot)
-    return render_template("index-bokeh.html", script=script, div=div, feature_names=feature_names,
-        current_feature_name=current_feature_name)
+#    script, div = components(plot)
+#    return render_template("index-bokeh.html", script=script, div=div, feature_names=feature_names,
+#        current_feature_name=current_feature_name)
 
 
 #@app.route('/bokeh')
