@@ -1,4 +1,4 @@
-# stock_spider/middlewares.py
+# stock_listing/middlewares.py
 
 # -*- coding: utf-8 -*-
 

@@ -4,7 +4,7 @@ from mongoengine.document import Document
 from mongoengine.fields import DateTimeField, StringField, FloatField
 # IntField, URLField
 
-class Listing(Document):
+class StockListing(Document):
     #Class for defining structure of daily listings
 
     date = DateTimeField(required=True)
@@ -18,7 +18,7 @@ class Listing(Document):
     change = FloatField(required=True)
 
     meta = {
-        'collection': 'listings', # daily summary
+        'collection': 'stock_listings', # daily summary
         'ordering': ['-change'], # default ordering
         'auto_create_index': False, # MongoEngine will not create index
         }

@@ -1,4 +1,4 @@
-# stock_spider/pipelines.py
+# stock_listing/pipelines.py
 
 # -*- coding: utf-8 -*-
 

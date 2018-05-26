@@ -1,0 +1,20 @@
+bokeh-flask
+http://biobits.org/bokeh-flask.html
+
+bokeh-server
+https://bokeh.pydata.org/en/latest/docs/user_guide/server.html#userguide-server-applications
+
+list of dependencies
+- mongo
+- pymongo
+- mongoengine
+- jinja2
+- requests
+- flask
+- flask-mongoengine
+- bokeh
+- newspaper(3k)
+- pandas
+- configparser
+
+pip install git+https://github.com/codelucas/newspaper.git@python-2-head

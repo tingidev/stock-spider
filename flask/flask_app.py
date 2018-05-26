@@ -45,7 +45,7 @@ app.debug = True
 db = None
 
 def get_db():
-    ## Initialize / refresh DB post-fork for server performance
+    ## initialize / refresh DB post-fork for server performance
     global db
     if db is None:
         db = MongoEngine()
@@ -70,29 +70,29 @@ def index():
 
 @app.route("/date")
 def all_dates():
-    ## get all the dates the scraper was run on
+    ## get all dates the scraper was run on
     dates = Listing.objects().fields(date_str=1).distinct('date_str')
     return render_template(
         'all-dates.html',
-        dates = reversed(sorted(list(dates))) #latest date on top
+        dates = reversed(sorted(list(dates))) # latest date on top
         )
 
 @app.route("/location")
 def all_locs():
-    ## get all the locations the scraper was run on
+    ## get all locations the scraper was run on
     locs = Listing.objects().fields(loc=1).distinct('loc')
     return render_template(
         'all-locs.html',
-        locs = list(locs) #latest date on top
+        locs = list(locs)
         )  
 
 @app.route("/company")
 def all_comps():
-    ## get all the locations the scraper was run on
+    ## get all companies the scraper was run on
     comps = Listing.objects().fields(name=1).distinct('name')
     return render_template(
         'all-comps.html',
-        comps = sorted(list(comps)) #latest date on top
+        comps = sorted(list(comps)) # alphabetically
         )  
 
 @app.route("/date/<day_to_pull>")
@@ -106,6 +106,7 @@ def by_date(day_to_pull=None):
 
 @app.route("/location/<loc_to_pull>")
 def by_location(loc_to_pull=None):
+    ## display only selected location
     dates = Listing.objects().fields(date_str=1).distinct('date_str')
     return render_template(
         'index-by-loc.html',
@@ -116,6 +117,7 @@ def by_location(loc_to_pull=None):
 
 @app.route("/company/<comp_to_pull>")
 def by_comp(comp_to_pull=None):
+    ## display only selected company
     dates = Listing.objects().fields(date_str=1).distinct('date_str')
     return render_template(
         'index-by-comp.html',

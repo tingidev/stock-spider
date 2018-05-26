@@ -1,4 +1,4 @@
-# stock_spider/settings.py
+# stock_listing/settings.py
 
 # -*- coding: utf-8 -*-
 
@@ -14,13 +14,13 @@
 import os
 import configparser
 
-BOT_NAME = 'stock_listing'
+BOT_NAME = 'stock_crawler'
 
 SPIDER_MODULES = ['stock_listing.spiders']
 NEWSPIDER_MODULE = 'stock_listing.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'tingi dev (local)'
+USER_AGENT = 'tingi.dev@gmail.com'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -79,8 +79,6 @@ config.read(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'settings.c
 mlab_uri = config.get('MongoDB', 'mlab_uri')
 
 MONGO_DATABASE = 'tingi-sandbox'
-#MONGO_DATABASE = 'stocks'
-#MONGO_URI = 'mongodb://localhost:27017'
 MONGO_URI = mlab_uri
 
 # Enable and configure the AutoThrottle extension (disabled by default)

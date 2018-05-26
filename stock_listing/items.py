@@ -1,4 +1,4 @@
-# stock_spider/items.py
+# stock_listing/items.py
 
 # -*- coding: utf-8 -*-
 

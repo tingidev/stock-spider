@@ -3,7 +3,7 @@
 import os
 import configparser
 from mongoengine.connection import connect
-from .data_model import Listing
+from .data_model import StockListing
 from .render_template import render
 from .mailgun_emailer import send_email
 
@@ -19,13 +19,13 @@ def email_last_scraped_listing():
     connect('tingi-sandbox', host=MONGO_URI)
 
     ## get last date of scraper run
-    for listing in Listing.objects().fields(date_str=1).order_by('-date_str').limit(1):
+    for listing in StockListing.objects().fields(date_str=1).order_by('-date_str').limit(1):
         day_to_pull = listing.date_str
 
     ## pass vars, render template, and send
     context = {
         'day_to_pull': day_to_pull,
-        'Listing': Listing,
+        'Listing': StockListing,
     }
     html = render("template.html", context)
     send_email(html)

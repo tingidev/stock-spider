@@ -18,7 +18,7 @@ class Listing(db.Document):
     change = db.FloatField(required=True)
 
     meta = {
-        'collection': 'listings', # daily summary
+        'collection': 'stock_listings', # daily summary
         'ordering': ['-change'], # default ordering
         'auto_create_index': False, # MongoEngine will not create index
         }
