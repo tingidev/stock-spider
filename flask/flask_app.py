@@ -84,7 +84,7 @@ def all_locs():
     return render_template(
         'all-locs.html',
         locs = list(locs)
-        )  
+        )
 
 @app.route("/company")
 def all_comps():
@@ -93,7 +93,7 @@ def all_comps():
     return render_template(
         'all-comps.html',
         comps = sorted(list(comps)) # alphabetically
-        )  
+        )
 
 @app.route("/date/<day_to_pull>")
 def by_date(day_to_pull=None):
