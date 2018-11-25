@@ -1,5 +1,5 @@
 tutorials
-bokeh-flask: http://biobits.org/bokeh-flask.html 
+bokeh-flask: http://biobits.org/bokeh-flask.html
 bokeh-server: https://bokeh.pydata.org/en/latest/docs/user_guide/server.html#userguide-server-applications
 python-pymongo: https://dzone.com/articles/getting-started-with-python-and-mongodb
 
